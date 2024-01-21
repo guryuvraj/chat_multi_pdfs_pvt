@@ -162,7 +162,7 @@ def main():
     st.write(css, unsafe_allow_html=True)
     st.subheader("Your Documents")
     pdf_docs = st.file_uploader(
-            "Upload your PDFs here and click on 'Process;", 
+            "Upload your PDFs here and click on 'Process'", 
             accept_multiple_files=True)
         
     if st.button("Process"):
