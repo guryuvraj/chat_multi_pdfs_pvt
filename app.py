@@ -1,3 +1,4 @@
+from tkinter.tix import COLUMN
 import streamlit as st
 from dotenv import load_dotenv
 from PyPDF2 import PdfReader
@@ -150,7 +151,13 @@ def handle_userinput(user_question):
 def main():
     load_dotenv()
     st.set_page_config(page_title="Chat with Multiple PDFs", page_icon=":books:")
-    st.header("Chat with multiple PDFs :books:")
+  
+         
+    with st.sidebar:
+
+        st.image("logo.gif")
+        st.header("Chat with multiple PDFs :books:")
+        st.caption("At Questionary, we're breaking down the barriers of traditional PDF interaction. Our innovative platform is designed for curious minds and knowledge seekers, enabling users to upload PDF documents and directly ask questions within them. ")
 
     st.write(css, unsafe_allow_html=True)
     st.subheader("Your Documents")
@@ -195,8 +202,8 @@ def main():
 
 
 
-    st.write(user_template.replace("{{MSG}}", "hello bot"), unsafe_allow_html=True)
-    st.write(bot_template.replace("{{MSG}}", "hello human"), unsafe_allow_html=True)
+    # st.write(user_template.replace("{{MSG}}", "hello bot"), unsafe_allow_html=True)
+    # st.write(bot_template.replace("{{MSG}}", "hello human"), unsafe_allow_html=True)
 
 
 
