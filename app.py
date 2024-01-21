@@ -150,40 +150,15 @@ def handle_userinput(user_question):
 def main():
     load_dotenv()
     st.set_page_config(page_title="Chat with Multiple PDFs", page_icon=":books:")
+    st.header("Chat with multiple PDFs :books:")
 
     st.write(css, unsafe_allow_html=True)
-
-
-
-
-    if "conversation" not in st.session_state:
-        st.session_state.conversation = None
-    if "chat_history" not in st.session_state:
-        st.session_state.chat_history = None
-
-        
-
-
-    st.header("Chat with multiple PDFs :books:")
-    user_question = st.text_input("Ask a question about your documents:")
-
-    if user_question:
-        handle_userinput(user_question)
-
-
-
-    # st.write(user_template.replace("{{MSG}}", "hello bot"), unsafe_allow_html=True)
-    # st.write(bot_template.replace("{{MSG}}", "hello human"), unsafe_allow_html=True)
-
-
-
-    with st.sidebar:
-        st.subheader("Ypur Documents")
-        pdf_docs = st.file_uploader(
+    st.subheader("Your Documents")
+    pdf_docs = st.file_uploader(
             "Upload your PDFs here and click on 'Process;", 
             accept_multiple_files=True)
         
-        if st.button("Process"):
+    if st.button("Process"):
             with st.spinner("Processing"):
 
                 # get the pdf text
@@ -198,6 +173,53 @@ def main():
 
                 # Create Conversation chain
                 st.session_state.conversation  = get_conversation_chain(vectorstore)
+
+
+
+
+
+
+    if "conversation" not in st.session_state:
+        st.session_state.conversation = None
+    if "chat_history" not in st.session_state:
+        st.session_state.chat_history = None
+
+        
+
+
+    st.subheader("Ask Question!")
+    user_question = st.text_input("Ask a question about your documents:")
+
+    if user_question:
+        handle_userinput(user_question)
+
+
+
+    st.write(user_template.replace("{{MSG}}", "hello bot"), unsafe_allow_html=True)
+    st.write(bot_template.replace("{{MSG}}", "hello human"), unsafe_allow_html=True)
+
+
+
+    # st.subheader("Ypur Documents")
+    # pdf_docs = st.file_uploader(
+    #         "Upload your PDFs here and click on 'Process;", 
+    #         accept_multiple_files=True)
+        
+    # if st.button("Process"):
+    #         with st.spinner("Processing"):
+
+    #             # get the pdf text
+    #             raw_text = get_pdf_text(pdf_docs)
+
+    #             # get the text chunks
+    #             text_chunks = get_text_chunks(raw_text)
+    #             # st.write(text_chunks)
+
+    #             # Create vector store
+    #             vectorstore = get_vectorstore(text_chunks)
+
+    #             # Create Conversation chain
+    #             st.session_state.conversation  = get_conversation_chain(vectorstore)
 
 
 if __name__ == '__main__':
